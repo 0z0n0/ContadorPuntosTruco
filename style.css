@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: darkgreen;
+    color: antiquewhite;
+}
+/* PANTALLA 1 */
+.pant1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.equipo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    background-color: darkgreen;
+    color: antiquewhite;
+    border: antiquewhite solid 0.08rem;
+    height: 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.btnPuntaje {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.btnPuntaje input {
+    width: 7rem;
+}
+
+.inicio {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+/* FIN PANTALLA 1 */
+/* ----------------------------------------------- */
+
+
+/* PANTALLA 2 */
+.v-line{
+    border-left: thick solid #000;
+    height:100%;
+    left: 50%;
+    position: absolute;
+   }
+.pant2{
+    display: none;
+    flex-direction: column;
+}
+
+.comumnas{
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+.columnaEquipo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fila1{
+    display: flex;
+    font-size: 1rem;
+}
+
+.fila1 h3{
+    margin: 0 1rem;
+    
+}
+.fila{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+hr{
+    height: 0.3rem;
+    background-color: antiquewhite;
+    width: 10rem;
+}
+
+button{
+    width: 2rem;
+}
+
+img{
+    width: 5rem;
+}
+.modoJuego{
+    display: flex;
+    justify-content: center;
+}
+
+.filaFinal{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container {
+    background-color: rgb(122, 124, 124);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.hijo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white; /* Añadido para visualizar los límites de cada columna */
+}
+
+.nieto {
+    /* Puedes agregar estilos adicionales según sea necesario */
+}
+
