@@ -19,6 +19,8 @@ $(document).ready(function () {
     contadorEq1 = 0;
     contadorEq2 = 0;
     contadorFosforos = 0;
+    $("#p1").text(contadorEq1);
+    $("#p2").text(contadorEq1);
         
     fnChequeo();
   }
