@@ -1,134 +1,87 @@
 $(document).ready(function () {
-  console.log("Funcando");
-  let2contadorEq1 = 0;
-  let contadorEq2 = 0;
-  let puntajeMax = 0;
-  let contadorFosforos = 0;
- 
   
+  var max = 30;
 
   $("#inicio").on("click", fnInicio);
-  $(".btnPuntaje input[type='button']").on("click", fnpuntajemaximo);
-    $("#fin").on("click", fnfin);
-  function fnpuntajemaximo() {
-    puntajeMax = parseInt(this.id.slice(-2));
-    console.log("Puntaje: ", puntajeMax);
-  }
 
   function fnInicio() {
-    contadorEq1 = 0;
-    contadorEq2 = 0;
-    contadorFosforos = 0;
-    $("#p1").text(contadorEq1);
-    $("#p2").text(contadorEq1);
-        
-    fnChequeo();
+    var nomEq1 = $("#eq1");
+  var nomEq2 = $("#eq2")
+    
+    $("#pant1").css("display", "none");
+    $("#pant2").css("display", "flex");
+    $("#max").html("a "+ max);
+    $("#ne1").html(nomEq1.val());
+    $("#ne2").html(nomEq2.val());
+    $("#p1").html("0");
+    $("#p2").html("0");
+    $(".ImgPuntos").attr("src", "Recursos/0.png")
+    $("#inicio").addClass("seleccionado");
   }
 
-  function fnChequeo(){
-    if (puntajeMax === 0){
-        alert("Debes Seleccionar la cantidad de puntos")
-    }else{
-        fnOcultarPantalla();
-    fnObtenerNombre();
-    fnContador();
+  $("#a24").on("click", fnSetearA24);
+  $("#a30").on("click", fnSetearA30);
+
+  function fnSetearA24(){
+    console.log("me apretaste")
+    max = 24;
+    $("#a24").addClass("seleccionado");
+    $("#a30").removeClass("seleccionado");
+  }
+
+  function fnSetearA30(){
+    max = 30;
+    $("#a30").addClass("seleccionado");
+    $("#a24").removeClass("seleccionado");
+  }
+
+  $("#s1").on("click",function(){fnSumar(1)} );
+  $("#s2").on("click",function(){fnSumar(2)});
+  $("#r1").on("click",function(){fnRestar(1)});
+  $("#r2").on("click",function(){fnRestar(2)});
+
+  function fnSumar(Equipo){
+    puntos = parseInt($("#p"+Equipo).html());
+    if(puntos < max){
+      puntos ++;
+    $("#p"+Equipo).html(puntos);
+    dibujarpalitos(Equipo);
     }
   }
 
-  function fnfin() {
-    $(".pant1").css("display", "flex");
-    $(".pant2").css("display", "none");
-    puntajeMax = 0
-    for (var i = 1; i < 31;i++){
-        $("#p1"+i).attr("src", "Recursos/0.png");
-        $("#p2"+i).attr("src", "Recursos/0.png");
+  function fnRestar(Equipo){
+    puntos = parseInt($("#p"+Equipo).html());
+    if(puntos > 0){
+      puntos --;
+    $("#p"+Equipo).html(puntos);
+    dibujarpalitos(Equipo);
     }
   }
 
-  function fnOcultarPantalla(){
-    $(".pant1").css("display", "none");
-    $(".pant2").css("display", "flex");
-  }
-
-  function fnObtenerNombre() {
-    let valorNombreEq1 = $("#eq1").val();
-    let valorNombreEq2 = $("#eq2").val();
-    console.log(valorNombreEq1 + " - " + valorNombreEq2);
-    $("#ne1").text(valorNombreEq1);
-    $("#ne2").text(valorNombreEq2);
-  }
-
-  function fnContador() {
-    $("#s1").on("click", fnSumarEq1);
-    $("#r1").on("click", fnRestarEq1);
-    $("#s2").on("click", fnSumarEq2);
-    $("#r2").on("click", fnRestarEq2);
-  }
-
-  function fnSumarEq1() {
-    if (contadorEq1 < puntajeMax) {
-      contadorEq1 += 1;
-      $("#p1").text(contadorEq1);
-      console.log("Contador equipo 1: " + contadorEq1);
-  
-      const imagenesPorGrupo = (puntajeMax === 24) ? [5, 5, 2, 5, 5, 2] : [5, 5, 5, 5, 5, 5];
-  
-      let totalImagenes = 0;
-      let grupoActual = 0;
-  
-      for (let i = 1; i <= 6; i++) {
-        totalImagenes += imagenesPorGrupo[grupoActual];
-  
-        if (contadorEq1 <= totalImagenes) {
-          const imagenEnGrupo = contadorEq1 - (totalImagenes - imagenesPorGrupo[grupoActual]) ;
-          $(`#p1${i}`).attr("src", "Recursos/" + imagenEnGrupo + ".png");
-          break;
+  function dibujarpalitos(Equipo){
+    palitosADibujar = parseInt($("#p"+Equipo).html());
+    console.log(palitosADibujar);
+    for (var i = 1; i <= 6; i++) {
+      id = "#p"+Equipo+i;
+      console.log(id);
+      if(max ==24 && i == 3 && palitosADibujar >= 2){
+        $(id).attr("src", "Recursos/2.png")
+        palitosADibujar = palitosADibujar - 2;
+      }else{
+        if (palitosADibujar >= 5){
+          $(id).attr("src", "Recursos/5.png")
+          palitosADibujar = palitosADibujar - 5;
+        }else{
+          $(id).attr("src","Recursos/"+palitosADibujar+".png");
+          palitosADibujar = 0
         }
-  
-        grupoActual++;
-      }
-    }
+      }      
   }
-  
-
-  function fnRestarEq1() {
-    if (contadorEq1 > 0) {
-      contadorEq1 -= 1;
-      $("#p1").text(contadorEq1);
-      console.log(contadorEq1);
-    }
   }
 
-  function fnSumarEq2() {
-    if (contadorEq2 < puntajeMax) {
-        contadorEq2 += 1;
-        $("#p2").text(contadorEq2);
-        console.log("Contador equipo 2: " + contadorEq2);
-    
-        const imagenesPorGrupo = (puntajeMax === 24) ? [5, 5, 2, 5, 5, 2] : [5, 5, 5, 5, 5, 5];
-    
-        let totalImagenes = 0;
-        let grupoActual = 0;
-    
-        for (let i = 1; i <= 6; i++) {
-          totalImagenes += imagenesPorGrupo[grupoActual];
-    
-          if (contadorEq2 <= totalImagenes) {
-            const imagenEnGrupo = contadorEq2 - (totalImagenes - imagenesPorGrupo[grupoActual]) ;
-            $(`#p2${i}`).attr("src", "Recursos/" + imagenEnGrupo + ".png");
-            break;
-          }
-    
-          grupoActual++;
-        }
-      }
-  }
+  $("#fin").on("click", function(){
+    $("#pant2").css("display", "none");
+    $("#pant1").css("display", "flex");
+  })
 
-  function fnRestarEq2() {
-    if (contadorEq2 > 0) {
-      contadorEq2 -= 1;
-      $("#p2").text(contadorEq2);
-      console.log(contadorEq2);
-    }
-  }
 });
